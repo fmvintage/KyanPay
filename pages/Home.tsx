@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useApp } from '../App.tsx';
@@ -83,7 +82,7 @@ const Home: React.FC = () => {
         <div className="mb-10 p-5 bg-gradient-to-br from-cyan-50 to-white dark:from-slate-800 dark:to-slate-800/50 rounded-[2rem] border border-cyan-100/50 dark:border-slate-700 shadow-sm">
           <div className="flex items-center gap-3 mb-3">
             <div className="w-8 h-8 bg-cyan-600 text-white rounded-lg flex items-center justify-center text-xs shadow-lg shadow-cyan-200">
-              <i className="fa-solid fa-sparkles"></i>
+              <i className="fa-solid fa-wand-magic-sparkles"></i>
             </div>
             <h4 className="font-black text-xs text-cyan-900 dark:text-cyan-100 uppercase tracking-widest">Kyan Smart AI</h4>
           </div>

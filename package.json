@@ -1,5 +1,5 @@
 {
-  "name": "copy-of-kyanpay",
+  "name": "kyanpay",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "react": "19.0.0",
-    "react-dom": "19.0.0",
+    "react-dom": "^19.2.4",
     "react-router-dom": "6.28.0",
     "@google/genai": "1.41.0"
   },
