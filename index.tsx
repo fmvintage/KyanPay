@@ -12,9 +12,6 @@ if (rootElement) {
         <App />
       </React.StrictMode>
     );
-    
-    // Notify window that React has initialized to clear splash screen
-    window.dispatchEvent(new Event('load'));
     console.log("PayFlow Environment Secured.");
   } catch (error) {
     console.error("Initialization Failed:", error);
