@@ -8,56 +8,89 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <script>
-    // Mock process env for the browser environment
     window.process = { env: { API_KEY: "" } };
-
-    // Global error listener to catch load-time failures
-    window.onerror = function(msg, url, lineNo, columnNo, error) {
-      console.error('Window Error:', msg, 'at', url, ':', lineNo);
-      const root = document.getElementById('root');
-      if (root && root.innerHTML === '') {
-        root.innerHTML = '<div style="padding: 20px; color: red; font-family: sans-serif;">' +
-          '<h2>Terminal Error</h2>' +
-          '<p>' + msg + '</p>' +
-          '<button onclick="location.reload()" style="padding: 10px; background: #2563eb; color: white; border: none; border-radius: 5px;">Retry Connection</button>' +
-          '</div>';
-      }
-      return false;
-    };
   </script>
 
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-    body {
-      font-family: 'Inter', sans-serif;
-      background-color: #f8fafc;
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+    
+    body, html {
       margin: 0;
       padding: 0;
+      height: 100%;
+      background-color: #ffffff;
+      font-family: 'Inter', sans-serif;
+      overflow: hidden;
     }
-    .scrollbar-hide::-webkit-scrollbar {
-      display: none;
+
+    #root {
+      height: 100%;
     }
-    .scrollbar-hide {
-      -ms-overflow-style: none;
-      scrollbar-width: none;
+
+    /* Modern Splash Screen */
+    .splash-container {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #ffffff;
+      z-index: 9999;
+      transition: opacity 0.5s ease-out;
     }
-    #root:empty::after {
-      content: 'Connecting to PayFlow Network...';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      font-size: 10px;
-      color: #2563eb;
-      animation: pulse 1.5s infinite;
+
+    .splash-logo {
+      width: 80px;
+      height: 80px;
+      background: #2563eb;
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 32px;
+      box-shadow: 0 20px 40px -10px rgba(37, 99, 235, 0.4);
+      animation: logo-pulse 2s infinite ease-in-out;
     }
-    @keyframes pulse {
-      0%, 100% { opacity: 0.5; }
-      50% { opacity: 1; }
+
+    .splash-text {
+      margin-top: 24px;
+      font-size: 18px;
+      font-weight: 900;
+      color: #1e293b;
+      letter-spacing: -0.025em;
     }
+
+    .loading-bar-bg {
+      margin-top: 16px;
+      width: 120px;
+      height: 4px;
+      background: #f1f5f9;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .loading-bar-fill {
+      width: 40%;
+      height: 100%;
+      background: #2563eb;
+      border-radius: 10px;
+      animation: loading-fill 1.5s infinite ease-in-out;
+    }
+
+    @keyframes logo-pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.8; }
+    }
+
+    @keyframes loading-fill {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(250%); }
+    }
+
+    .scrollbar-hide::-webkit-scrollbar { display: none; }
+    .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
   </style>
 
 <script type="importmap">
@@ -74,8 +107,35 @@
 }
 </script>
 </head>
-<body class="bg-slate-50">
-  <div id="root"></div>
+<body>
+  <!-- Root remains empty for React to mount -->
+  <div id="root">
+    <!-- Inline splash screen that React will replace once mounted -->
+    <div class="splash-container" id="splash">
+      <div class="splash-logo">
+        <i class="fa-solid fa-paper-plane"></i>
+      </div>
+      <div class="splash-text">PayFlow</div>
+      <div class="loading-bar-bg">
+        <div class="loading-bar-fill"></div>
+      </div>
+    </div>
+  </div>
+
   <script type="module" src="./index.tsx"></script>
+
+  <script>
+    // Handle splash screen removal after React mounts
+    window.addEventListener('load', () => {
+      // Small timeout to ensure everything is ready
+      setTimeout(() => {
+        const splash = document.getElementById('splash');
+        if (splash && document.querySelector('#root > div:not(.splash-container)')) {
+          splash.style.opacity = '0';
+          setTimeout(() => splash.remove(), 500);
+        }
+      }, 1000);
+    });
+  </script>
 </body>
 </html>
