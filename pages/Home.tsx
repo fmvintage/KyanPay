@@ -12,27 +12,27 @@ const Home: React.FC = () => {
 
   const askAssistant = async () => {
     setIsAskingAi(true);
-    const response = await getFinancialAdvice(transactions, "Analyze my recent transactions and give me a quick spending summary in INR.");
+    const response = await getFinancialAdvice(transactions, "Analyze my recent transactions and give me a summary.");
     setAiResponse(response);
     setIsAskingAi(false);
   };
 
   return (
     <div className="flex-1 overflow-y-auto pb-32">
-      <div className="p-6 bg-cyan-600 text-white rounded-b-[3rem] shadow-xl relative overflow-hidden">
-        <div className="absolute -right-10 -top-10 w-48 h-48 bg-cyan-500 rounded-full blur-3xl opacity-40"></div>
-        <div className="absolute -left-10 -bottom-10 w-48 h-48 bg-blue-700 rounded-full blur-3xl opacity-40"></div>
+      <div className="p-6 bg-blue-600 text-white rounded-b-[3rem] shadow-xl relative overflow-hidden">
+        <div className="absolute -right-10 -top-10 w-48 h-48 bg-blue-500 rounded-full blur-3xl opacity-40"></div>
+        <div className="absolute -left-10 -bottom-10 w-48 h-48 bg-indigo-700 rounded-full blur-3xl opacity-40"></div>
         
         <div className="relative z-10">
           <div className="flex justify-between items-center mb-10">
             <div className="flex items-center gap-3">
               <div className="relative">
                 <img src={user.avatar} className="w-11 h-11 rounded-2xl border-2 border-white/30 p-0.5 shadow-lg" alt="Avatar" />
-                <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-400 border-2 border-cyan-600 rounded-full"></div>
+                <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-400 border-2 border-blue-600 rounded-full"></div>
               </div>
               <div>
-                <p className="text-[10px] text-cyan-100 font-bold uppercase tracking-widest opacity-80">Connected</p>
-                <h3 className="font-black text-lg">{user.name || 'Citizen'}</h3>
+                <p className="text-[10px] text-blue-100 font-bold uppercase tracking-widest opacity-80">Welcome back,</p>
+                <h3 className="font-black text-lg">{user.name || 'User'}</h3>
               </div>
             </div>
             <div className="flex gap-3">
@@ -41,14 +41,14 @@ const Home: React.FC = () => {
                 <span className="absolute top-2.5 right-2.5 w-1.5 h-1.5 bg-red-400 rounded-full"></span>
               </button>
               <button onClick={() => navigate('/profile')} className="w-10 h-10 bg-white/10 rounded-xl flex items-center justify-center border border-white/20 backdrop-blur-md">
-                <i className="fa-solid fa-layer-group text-sm"></i>
+                <i className="fa-solid fa-gear text-sm"></i>
               </button>
             </div>
           </div>
 
           <div className="text-center mb-8">
-            <p className="text-xs text-cyan-100 mb-2 flex items-center justify-center gap-2 font-bold uppercase tracking-[0.2em] opacity-80">
-              Nexus Balance
+            <p className="text-xs text-blue-100 mb-2 flex items-center justify-center gap-2 font-bold uppercase tracking-[0.2em] opacity-80">
+              Total Balance
               <button onClick={() => setShowBalance(!showBalance)} className="text-white/60 hover:text-white transition-colors">
                 <i className={`fa-solid ${showBalance ? 'fa-eye-slash' : 'fa-eye'} text-[10px]`}></i>
               </button>
@@ -61,50 +61,50 @@ const Home: React.FC = () => {
               <div className="mt-4">
                 <button 
                   onClick={() => navigate('/add-bank')}
-                  className="bg-white text-cyan-700 px-8 py-3 rounded-2xl text-xs font-black uppercase tracking-widest shadow-xl shadow-cyan-900/20 active:scale-95 transition-all"
+                  className="bg-white text-blue-700 px-8 py-3 rounded-2xl text-xs font-black uppercase tracking-widest shadow-xl shadow-blue-900/20 active:scale-95 transition-all"
                 >
-                  Link Node
+                  Link Bank
                 </button>
               </div>
             )}
           </div>
 
           <div className="grid grid-cols-4 gap-4 mt-12 mb-4">
-            <ActionButton icon="fa-paper-plane" label="Transmit" onClick={() => navigate('/send')} />
+            <ActionButton icon="fa-paper-plane" label="Send" onClick={() => navigate('/send')} />
             <ActionButton icon="fa-vault" label="Vault" onClick={() => navigate('/wallet')} />
-            <ActionButton icon="fa-link" label="Nodes" onClick={() => navigate('/add-bank')} />
-            <ActionButton icon="fa-microchip" label="Insights" onClick={askAssistant} />
+            <ActionButton icon="fa-building-columns" label="Banks" onClick={() => navigate('/add-bank')} />
+            <ActionButton icon="fa-wand-magic-sparkles" label="AI" onClick={askAssistant} />
           </div>
         </div>
       </div>
 
       <div className="p-6">
-        <div className="mb-10 p-5 bg-gradient-to-br from-cyan-50 to-white dark:from-slate-800 dark:to-slate-800/50 rounded-[2rem] border border-cyan-100/50 dark:border-slate-700 shadow-sm">
+        <div className="mb-10 p-5 bg-gradient-to-br from-blue-50 to-white dark:from-slate-800 dark:to-slate-800/50 rounded-[2rem] border border-blue-100/50 dark:border-slate-700 shadow-sm">
           <div className="flex items-center gap-3 mb-3">
-            <div className="w-8 h-8 bg-cyan-600 text-white rounded-lg flex items-center justify-center text-xs shadow-lg shadow-cyan-200">
-              <i className="fa-solid fa-wand-magic-sparkles"></i>
+            <div className="w-8 h-8 bg-blue-600 text-white rounded-lg flex items-center justify-center text-xs shadow-lg shadow-blue-200">
+              <i className="fa-solid fa-robot"></i>
             </div>
-            <h4 className="font-black text-xs text-cyan-900 dark:text-cyan-100 uppercase tracking-widest">Kyan Smart AI</h4>
+            <h4 className="font-black text-xs text-blue-900 dark:text-blue-100 uppercase tracking-widest">PayFlow Insights</h4>
           </div>
           <div className="min-h-[60px]">
             {isAskingAi ? (
-              <div className="flex gap-1 items-center">
-                <div className="w-1.5 h-1.5 bg-cyan-600 rounded-full animate-bounce"></div>
-                <div className="w-1.5 h-1.5 bg-cyan-600 rounded-full animate-bounce delay-75"></div>
-                <div className="w-1.5 h-1.5 bg-cyan-600 rounded-full animate-bounce delay-150"></div>
+              <div className="flex gap-1 items-center py-4">
+                <div className="w-1.5 h-1.5 bg-blue-600 rounded-full animate-bounce"></div>
+                <div className="w-1.5 h-1.5 bg-blue-600 rounded-full animate-bounce delay-75"></div>
+                <div className="w-1.5 h-1.5 bg-blue-600 rounded-full animate-bounce delay-150"></div>
               </div>
             ) : aiResponse ? (
               <div className="text-xs leading-relaxed text-slate-600 dark:text-slate-300 font-medium">{aiResponse}</div>
             ) : (
-              <p className="text-[11px] text-slate-400 font-medium italic">Ready to analyze your economy. Tap Insights above.</p>
+              <p className="text-[11px] text-slate-400 font-medium italic">Ask me to analyze your spending or for financial tips.</p>
             )}
           </div>
         </div>
 
         <section>
           <div className="flex justify-between items-center mb-6">
-            <h3 className="font-black text-sm uppercase tracking-widest text-slate-400">Recent Transmissions</h3>
-            <button onClick={() => navigate('/history')} className="text-[10px] font-black text-cyan-600 uppercase tracking-widest hover:underline">View All</button>
+            <h3 className="font-black text-sm uppercase tracking-widest text-slate-400">Transactions</h3>
+            <button onClick={() => navigate('/history')} className="text-[10px] font-black text-blue-600 uppercase tracking-widest hover:underline">View All</button>
           </div>
           <div className="space-y-4">
             {transactions.slice(0, 5).map(tx => (
@@ -118,9 +118,12 @@ const Home: React.FC = () => {
                     <p className="text-[10px] text-slate-400 font-bold uppercase tracking-tighter">{tx.date}</p>
                   </div>
                 </div>
-                <p className={`font-black text-sm ${tx.type === 'RECEIVED' ? 'text-green-600' : 'text-slate-800 dark:text-white'}`}>
-                  {tx.type === 'RECEIVED' ? '+' : '-'}₹{tx.amount.toLocaleString()}
-                </p>
+                <div className="text-right">
+                  <p className={`font-black text-sm ${tx.type === 'RECEIVED' ? 'text-green-600' : 'text-slate-800 dark:text-white'}`}>
+                    {tx.type === 'RECEIVED' ? '+' : '-'}₹{tx.amount.toLocaleString()}
+                  </p>
+                  <p className="text-[8px] text-slate-300 font-black uppercase tracking-widest">{tx.status}</p>
+                </div>
               </div>
             ))}
           </div>

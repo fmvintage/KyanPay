@@ -1,11 +1,10 @@
-
 import { TransactionStatus, TransactionType, Transaction, BankAccount, UserProfile, SupportTicket } from './types.ts';
 
 export const MOCK_USER: UserProfile = {
   name: 'Alex Johnson',
   phone: '+91 98765 43210',
-  email: 'alex.j@kyanpay.com',
-  upiId: 'alexjohnson@kyanpay',
+  email: 'alex.j@payflow.com',
+  upiId: 'alexjohnson@payflow',
   avatar: 'https://picsum.photos/seed/alex/200',
   isAdmin: true
 };
@@ -33,7 +32,7 @@ export const MOCK_TRANSACTIONS: Transaction[] = [
   {
     id: 'TX101',
     title: 'Starbucks Coffee',
-    amount: 15.50,
+    amount: 350.50,
     date: '2024-05-20',
     type: TransactionType.SENT,
     status: TransactionStatus.SUCCESS,
@@ -42,7 +41,7 @@ export const MOCK_TRANSACTIONS: Transaction[] = [
   {
     id: 'TX102',
     title: 'Sarah Miller',
-    amount: 120.00,
+    amount: 1200.00,
     date: '2024-05-19',
     type: TransactionType.RECEIVED,
     status: TransactionStatus.SUCCESS,
@@ -52,7 +51,7 @@ export const MOCK_TRANSACTIONS: Transaction[] = [
   {
     id: 'TX103',
     title: 'Electricity Bill',
-    amount: 85.20,
+    amount: 1850.20,
     date: '2024-05-18',
     type: TransactionType.BILL,
     status: TransactionStatus.SUCCESS,
@@ -61,7 +60,7 @@ export const MOCK_TRANSACTIONS: Transaction[] = [
   {
     id: 'TX104',
     title: 'Verizon Wireless',
-    amount: 45.00,
+    amount: 450.00,
     date: '2024-05-17',
     type: TransactionType.RECHARGE,
     status: TransactionStatus.FAILED,
@@ -70,7 +69,7 @@ export const MOCK_TRANSACTIONS: Transaction[] = [
   {
     id: 'TX105',
     title: 'Uber Ride',
-    amount: 22.40,
+    amount: 220.40,
     date: '2024-05-16',
     type: TransactionType.SENT,
     status: TransactionStatus.SUCCESS,

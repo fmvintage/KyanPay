@@ -1,6 +1,6 @@
 {
-  "name": "KyanPay",
-  "description": "A modern, secure, and feature-rich payment application with smart finance insights powered by Gemini.",
+  "name": "PayFlow",
+  "description": "A modern and secure digital payment ecosystem with AI-powered financial insights.",
   "requestFramePermissions": [
     "camera"
   ]

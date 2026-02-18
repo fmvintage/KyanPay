@@ -1,4 +1,3 @@
-
 import { GoogleGenAI } from "@google/genai";
 import { Transaction } from "../types.ts";
 
@@ -6,14 +5,14 @@ export const getFinancialAdvice = async (transactions: Transaction[], query: str
   const apiKey = typeof process !== 'undefined' ? process.env.API_KEY : null;
 
   if (!apiKey) {
-    return "AI Insights are currently unavailable (Missing API Key). Please configure your environment.";
+    return "AI Insights are currently unavailable. Please check your connection.";
   }
 
   try {
     const ai = new GoogleGenAI({ apiKey });
     const summary = transactions.map(t => `${t.title}: ₹${t.amount} (${t.category})`).join(', ');
     const prompt = `
-      You are KyanPay Smart Assistant. Your goal is to provide elite financial insights to the user based on their transaction history.
+      You are the PayFlow Smart Assistant. Your goal is to provide elite financial insights to the user based on their transaction history.
       
       Transaction History:
       ${summary}
@@ -21,10 +20,10 @@ export const getFinancialAdvice = async (transactions: Transaction[], query: str
       User Query: ${query}
       
       Response Requirements:
-      - Be professional, modern, and data-driven.
-      - Use Indian Rupee (INR) currency.
+      - Be professional, modern, and helpful.
+      - Use English language only.
       - Format with markdown (bold, lists).
-      - Keep response under 100 words.
+      - Keep the response under 100 words.
     `;
 
     const response = await ai.models.generateContent({
@@ -35,6 +34,6 @@ export const getFinancialAdvice = async (transactions: Transaction[], query: str
     return response.text;
   } catch (error) {
     console.error("Gemini Error:", error);
-    return "I'm sorry, KyanPay AI is experiencing a network lag. Please try again in a moment.";
+    return "PayFlow AI is currently processing other requests. Please try again in a moment.";
   }
 };
