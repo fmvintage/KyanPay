@@ -8,7 +8,22 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <script>
+    // Mock process env for the browser environment
     window.process = { env: { API_KEY: "" } };
+
+    // Global error listener to catch load-time failures
+    window.onerror = function(msg, url, lineNo, columnNo, error) {
+      console.error('Window Error:', msg, 'at', url, ':', lineNo);
+      const root = document.getElementById('root');
+      if (root && root.innerHTML === '') {
+        root.innerHTML = '<div style="padding: 20px; color: red; font-family: sans-serif;">' +
+          '<h2>Terminal Error</h2>' +
+          '<p>' + msg + '</p>' +
+          '<button onclick="location.reload()" style="padding: 10px; background: #2563eb; color: white; border: none; border-radius: 5px;">Retry Connection</button>' +
+          '</div>';
+      }
+      return false;
+    };
   </script>
 
   <style>
@@ -27,7 +42,7 @@
       scrollbar-width: none;
     }
     #root:empty::after {
-      content: 'Initializing PayFlow Secure Terminal...';
+      content: 'Connecting to PayFlow Network...';
       position: absolute;
       top: 50%;
       left: 50%;
@@ -51,10 +66,10 @@
     "react": "https://esm.sh/react@19.0.0",
     "react/": "https://esm.sh/react@19.0.0/",
     "react-dom": "https://esm.sh/react-dom@19.0.0",
-    "react-dom/": "https://esm.sh/react-dom@19.0.0/",
     "react-dom/client": "https://esm.sh/react-dom@19.0.0/client",
     "react-router-dom": "https://esm.sh/react-router-dom@6.28.0?deps=react@19.0.0,react-dom@19.0.0",
-    "@google/genai": "https://esm.sh/@google/genai@1.41.0"
+    "@google/genai": "https://esm.sh/@google/genai@1.41.0",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.4/"
   }
 }
 </script>
